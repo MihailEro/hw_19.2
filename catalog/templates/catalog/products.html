@@ -15,10 +15,9 @@
             </div>
         </div>
         {% endfor %}
+        <!-- Исходный вариант -->
+        <img src="/media/{{ object.image }}" />
+        <!-- Итоговый вариант -->
+        <img src="{% mediapath object.image %}" />
     </div>
     {% endblock %}
-</div>
-
-<script src="/static/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
