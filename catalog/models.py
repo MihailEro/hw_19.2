@@ -33,13 +33,21 @@ class Category(models.Model):
 
 
 class Blog(models.Model):
-    blog_title = models.CharField(max_length=100, verbose_name='Заголовок')
-    slug = models.CharField(max_length=100, verbose_name='slug')
-    contents = models.TextField(verbose_name='Содержимое')
-    preview = models.ImageField(upload_to='media/', verbose_name='Изображение', **NULLABLE)
-    date_production = models.DateField(verbose_name='Дата создания', auto_now_add=True)
-    is_publication = models.BooleanField(verbose_name='Опубликовано', default=True)
-    views_count = models.IntegerField(verbose_name='Просмотры', default=0)
+    objects = None
+    title = models.CharField(max_length=150, verbose_name='Заголовок')
+    slug = models.CharField(max_length=150, verbose_name='slug', **NULLABLE)
+    body = models.TextField(verbose_name='Содержимое')
+    preview = models.ImageField(upload_to='blog/', **NULLABLE, verbose_name='Изображение')
+    date_create = models.DateField(**NULLABLE, verbose_name='Дата создания', auto_now_add=True)
+    is_published = models.BooleanField(verbose_name='Опубликовано', default=True)
+    views_count = models.IntegerField(default=0, verbose_name='Просмотры')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Блог'
+        verbose_name_plural = 'Блог'
 
     def __str__(self):
         return self.blog_title
@@ -47,3 +55,5 @@ class Blog(models.Model):
     class Meta:
         verbose_name = 'Блог'
         verbose_name_plural = 'Блоги'
+
+
